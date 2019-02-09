@@ -133,6 +133,10 @@
                                             'face 'lsp-lens-face)))))
               it)))
 
+(defvar treemacs-icon-info "")
+(defvar treemacs-icon-warning "")
+(defvar treemacs-icon-error "")
+
 (defun lsp-treemacs--errors (file-name)
   (--map (cons file-name it) (gethash file-name (lsp-diagnostics))))
 
@@ -195,7 +199,9 @@
        (window (display-buffer-in-side-window buffer '((side . bottom)))))
   (select-window window)
   (treemacs-initialize)
+
   (treemacs-LSP-ERROR-LIST-extension)
+
   (treemacs-expand-lsp-error-list))
 
 (defun lsp-treemacs--after-diagnostics ()
