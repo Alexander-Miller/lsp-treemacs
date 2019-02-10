@@ -235,9 +235,9 @@ Will return an alist mapping display names to absolute paths."
   :top-level-marker t
   :root-label "Errors"
   :root-face 'font-lock-type-face
-  :root-key-form 'Buffers)
+  :root-key-form 'lsp-error-list)
 
-(let* ((buffer (get-buffer-create "*Showcase Buffer List*"))
+(let* ((buffer (get-buffer-create "*LSP Diagnostics*"))
        (window (display-buffer-in-side-window buffer '((side . bottom)))))
   (select-window window)
   (treemacs-initialize)
@@ -249,8 +249,8 @@ Will return an alist mapping display names to absolute paths."
 (defun lsp-treemacs--after-diagnostics ()
   "Update the diagnostics view."
   (with-demoted-errors "%s"
-    (with-current-buffer (get-buffer-create "*Showcase Buffer List*")
-      (treemacs-update-node '(:custom Buffers)))))
+    (with-current-buffer (get-buffer-create "*LSP Diagnostics*")
+      (treemacs-update-node '(:custom lsp-error-list)))))
 
 (add-hook 'lsp-after-diagnostics-hook 'lsp-treemacs--after-diagnostics)
 
