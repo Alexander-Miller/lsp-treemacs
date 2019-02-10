@@ -174,9 +174,9 @@ Will return an alist mapping display names to absolute paths."
                                             'face 'lsp-lens-face)))))
               it)))
 
-(defvar treemacs-icon-info "")
-(defvar treemacs-icon-warning "")
-(defvar treemacs-icon-error "")
+(defconst treemacs-icon-info    (treemacs-as-icon "I "))
+(defconst treemacs-icon-warning (treemacs-as-icon "W "))
+(defconst treemacs-icon-error   (treemacs-as-icon "E "))
 
 (defun lsp-treemacs--errors (file-name)
   "Get diagnostics for FILE-NAME."
