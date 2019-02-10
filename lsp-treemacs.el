@@ -182,17 +182,10 @@ Will return an alist mapping display names to absolute paths."
   "Get diagnostics for FILE-NAME."
   (--map (cons file-name it) (gethash file-name (lsp-diagnostics))))
 
-(treemacs-define-expandable-node lsp-error
-  :icon-open treemacs-icon-root
-  :icon-closed treemacs-icon-root
-  :query-function (lsp-treemacs--errors (treemacs-button-get btn :key))
-  :ret-action 'lsp-treemacs--open-error
-  :render-action
-  (treemacs-render-node
-   :icon (treemacs-as-icon ". " 'face 'font-lock-string-face)
-   :label-form (propertize (lsp-diagnostic-message item) 'face 'default)
-   :state (with-no-warnings treemacs-lsp-files-closed-state)
-   :key-form item))
+(treemacs-define-leaf-node lsp-error
+  'dynamic-icon
+  :tab-action #'ignore
+  :ret-action #'lsp-treemacs--open-error)
 
 (treemacs-define-expandable-node lsp-files
   :icon-open-form  (treemacs-icon-for-file (treemacs-button-get btn :key))
@@ -206,7 +199,7 @@ Will return an alist mapping display names to absolute paths."
            (2 treemacs-icon-warning)
            (t treemacs-icon-info))
    :label-form (propertize (lsp-diagnostic-message (cl-rest item)) 'face 'default)
-   :state treemacs-lsp-error-open-state
+   :state treemacs-lsp-error-state
    :key-form item))
 
 (treemacs-define-expandable-node lsp-projects
